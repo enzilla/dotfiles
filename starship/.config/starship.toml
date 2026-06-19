@@ -26,47 +26,36 @@ $time\
 [ ](fg:purple)\
 $line_break$character"""
 
-palette = 'catppuccin_mocha'
+palette = 'kanagawa_violet'
 
-[palettes.gruvbox_dark]
-color_fg0 = '#fbf1c7'
-color_bg1 = '#3c3836'
-color_bg3 = '#665c54'
-color_blue = '#458588'
-color_aqua = '#689d6a'
-color_green = '#98971a'
-color_orange = '#d65d0e'
-color_purple = '#b16286'
-color_red = '#cc241d'
-color_yellow = '#d79921'
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-orange = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
+[palettes.kanagawa_violet]
+rosewater = "#DCD7BA"
+flamingo = "#C8C093"
+pink = "#A292A3"
+orange = "#DCA561"
+red = "#C34043"
+maroon = "#E46876"
+peach = "#957FB8"
+yellow = "#C0A36E"
+green = "#76946A"
+teal = "#7AA89F"
+sky = "#7FB4CA"
+sapphire = "#7E9CD8"
+blue = "#7E9CD8"
+lavender = "#957FB8"
+purple = "#957FB8"
+text = "#DCD7BA"
+subtext1 = "#C8C093"
+subtext0 = "#A6A69C"
+overlay2 = "#727169"
+overlay1 = "#54546D"
+overlay0 = "#49495A"
+surface2 = "#363646"
+surface1 = "#2A2A37"
+surface0 = "#223249"
+base = "#1F1F28"
+mantle = "#16161D"
+crust = "#0D0C0C"
 
 [os]
 disabled = false
@@ -97,11 +86,11 @@ RedHatEnterprise = "󱄛"
 show_always = true
 style_user = "bg:surface0 fg:text"
 style_root = "bg:surface0 fg:text"
-format = '[ $user ]($style)'
+format = '[  $user  ]($style)'
 
 [directory]
 style = "fg:mantle bg:peach"
-format = "[ $path ]($style)"
+format = "[  $path  ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
@@ -115,11 +104,11 @@ truncation_symbol = "…/"
 [git_branch]
 symbol = ""
 style = "bg:teal"
-format = '[[ $symbol $branch ](fg:base bg:green)]($style)'
+format = '[[  $symbol $branch  ](fg:base bg:green)]($style)'
 
 [git_status]
 style = "bg:teal"
-format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
+format = '[[($all_status$ahead_behind  )](fg:base bg:green)]($style)'
 
 [nodejs]
 symbol = ""
@@ -169,13 +158,13 @@ format = '[[ $symbol( $version) ](fg:base bg:teal)]($style)'
 [docker_context]
 symbol = ""
 style = "bg:mantle"
-format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+format = '[[  $symbol( $context)  ](fg:sky bg:surface1)]($style)'
 
 [time]
 disabled = false
 time_format = "%R"
 style = "bg:peach"
-format = '[[  $time ](fg:mantle bg:purple)]($style)'
+format = '[[   $time  ](fg:mantle bg:purple)]($style)'
 
 [line_break]
 disabled = false
@@ -184,7 +173,7 @@ disabled = false
 disabled = false
 success_symbol = '[](bold fg:green)'
 error_symbol = '[](bold fg:red)'
-vimcmd_symbol = '[](bold fg:creen)'
+vimcmd_symbol = '[](bold fg:green)'
 vimcmd_replace_one_symbol = '[](bold fg:purple)'
 vimcmd_replace_symbol = '[](bold fg:purple)'
 vimcmd_visual_symbol = '[](bold fg:lavender)'
