@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+path=$(cd "${1:-$PWD}" 2>/dev/null && pwd -P)
+path=${path:-${1:-$PWD}}
+root=$(git -C "$path" rev-parse --show-toplevel 2>/dev/null)
+
+if [ -n "$root" ]; then
+  repo=$(basename "$root")
+  rel=${path#"$root"/}
+
+  if [ "$path" = "$root" ] || [ "$rel" = "$path" ]; then
+    printf '%s' "$repo"
+  else
+    printf '%s/%s' "$repo" "$(basename "$path")"
+  fi
+else
+  basename "$path"
+fi
