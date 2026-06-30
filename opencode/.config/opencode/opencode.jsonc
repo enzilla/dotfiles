@@ -8,41 +8,7 @@
   "skills": {
     "paths": ["~/.config/opencode/skills"]
   },
-  "permission": {
-    "read": "allow",
-    "glob": "allow",
-    "grep": "allow",
-    "list": "allow",
-    "todowrite": "allow",
-    "question": "allow",
-    "webfetch": "ask",
-    "websearch": "ask",
-    "edit": "ask",
-    "bash": {
-      "*": "ask",
-      "pwd": "allow",
-      "git status*": "allow",
-      "git diff*": "allow",
-      "git log*": "allow",
-      "git branch*": "allow",
-      "git remote*": "allow",
-      "stow -n*": "allow",
-      "stow --simulate*": "allow",
-      "rm *": "deny",
-      "sudo *": "deny",
-      "chmod *": "ask",
-      "chown *": "deny",
-      "curl *": "ask",
-      "wget *": "ask"
-    },
-    "external_directory": {
-      "*": "ask",
-      "~/.ssh/**": "deny",
-      "~/.gnupg/**": "deny",
-      "~/.config/opencode/auth*": "deny",
-      "~/.config/opencode/session/**": "deny"
-    }
-  },
+  "permission": "allow",
   "agent": {
     "plan": {
       "permission": {
