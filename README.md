@@ -102,7 +102,8 @@ The `opencode` package provides a shared global setup for all machines:
 - `opencode.jsonc` with conservative permissions, disabled sharing, snapshots, output limits, and optional MCP templates.
 - `agent/workbench.md` as the default primary agent for repo and dotfiles work.
 - `skills/safe-dotfiles-workflow/SKILL.md` for Stow-aware cross-device configuration changes.
-- `command/opencode-check.md` and `command/repo-review.md` for repeatable checks.
+- `command/opencode-check.md`, `command/repo-review.md`, and `command/security-audit.md` for repeatable checks.
+- Security-focused skills: `skills/security-audit/` for exploitability audits and `skills/secret-scanning/` for GitHub Secret Protection/push-protection guidance.
 
 Activate it safely with a dry run first:
 
