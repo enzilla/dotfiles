@@ -3,6 +3,7 @@
   "share": "disabled",
   "autoupdate": "notify",
   "snapshot": true,
+  "plugin": ["@dietrichgebert/ponytail"],
   "default_agent": "workbench",
   "instructions": ["~/.config/opencode/AGENTS.md"],
   "skills": {
