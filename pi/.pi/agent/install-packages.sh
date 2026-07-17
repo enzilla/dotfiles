@@ -1,0 +1,22 @@
+#!/bin/sh
+set -eu
+
+if ! command -v pi >/dev/null 2>&1; then
+  printf '%s\n' 'Install Pi before installing its packages.' >&2
+  exit 1
+fi
+
+for package in \
+  'npm:@juicesharp/rpiv-todo@1.20.0' \
+  'npm:@juicesharp/rpiv-ask-user-question@1.20.0' \
+  'npm:@ff-labs/pi-fff@0.10.0' \
+  'npm:pi-web-access@0.13.0' \
+  'npm:pi-lens@3.8.70' \
+  'npm:pi-mcp-adapter@2.11.0' \
+  'npm:pi-subagents@0.34.0' \
+  'npm:@gotgenes/pi-permission-system@20.7.3' \
+  'npm:@sreetej510/pi-usage@0.1.18' \
+  'npm:@dietrichgebert/ponytail@4.8.4'
+do
+  pi install "$package"
+done

@@ -8,9 +8,11 @@ This repository is organized so each top-level directory is a Stow package. Acti
 
 | Package | Configures | Target path |
 | --- | --- | --- |
+| `herdr` | Herdr agent multiplexer | `~/.config/herdr/config.toml` |
 | `kitty` | Kitty terminal | `~/.config/kitty` |
 | `nvim` | Neovim / LazyVim setup | `~/.config/nvim` |
 | `opencode` | opencode agents, skills, commands, MCP templates, and safety defaults | `~/.config/opencode` |
+| `pi` | Pi coding agent settings, theme, extensions, and package manifest | `~/.pi/agent` |
 | `starship` | Starship prompt | `~/.config/starship.toml` |
 | `tmux` | tmux and tmux plugins | `~/.config/tmux` |
 
@@ -18,7 +20,7 @@ This repository is organized so each top-level directory is a Stow package. Acti
 
 - `git`
 - `stow`
-- The tools you want to configure, such as `nvim`, `tmux`, `kitty`, and `starship`
+- The tools you want to configure, such as `herdr`, `nvim`, `tmux`, `kitty`, `pi`, and `starship`
 
 Install Stow with your system package manager:
 
@@ -83,16 +85,19 @@ to:
 Activate one package at a time:
 
 ```sh
+stow --no-folding -v -t "$HOME" herdr
 stow -v -t "$HOME" kitty
 stow -v -t "$HOME" starship
 stow -v -t "$HOME" tmux
 stow -v -t "$HOME" opencode
+stow -v -t "$HOME" pi
 ```
 
 Or activate everything currently in this repo:
 
 ```sh
-stow -v -t "$HOME" kitty nvim opencode starship tmux
+stow --no-folding -v -t "$HOME" herdr
+stow -v -t "$HOME" kitty nvim opencode pi starship tmux
 ```
 
 ## opencode
@@ -117,6 +122,60 @@ MCP servers are included as disabled templates because they may require network 
 
 After changing any opencode config, agent, command, skill, plugin, or MCP file, quit and restart opencode. Running sessions keep the config loaded at startup.
 
+## Herdr
+
+The `herdr` package configures the agent multiplexer with the shared Kanagawa Violet palette, transparent terminal background, workspace-grouped agent list, and terminal notifications. It keeps Herdr's default `Ctrl-b` prefix so it does not conflict with tmux's `Ctrl-Space` prefix.
+
+Herdr writes logs, sockets, and session state beside `config.toml`. Keep `~/.config/herdr` as a real directory and link only the config file:
+
+```sh
+cd ~/dotfiles
+mkdir -p "$HOME/.config/herdr"
+stow --no-folding -nv -t "$HOME" herdr
+stow --no-folding -v -t "$HOME" herdr
+herdr config check
+```
+
+If the dry run reports an existing `config.toml`, move that file to a backup first; leave Herdr's logs, sockets, and `session.json` in place.
+
+Install the lifecycle integrations for the configured coding agents, then reload Herdr:
+
+```sh
+herdr integration install pi
+herdr integration install opencode
+herdr integration status
+herdr server reload-config
+```
+
+## Pi
+
+The `pi` package configures the [Pi coding agent](https://pi.dev) with:
+
+- a Kanagawa Violet theme that follows Omarchy light/dark mode;
+- the existing task, question, fuzzy search, web research, and code-feedback extensions;
+- pinned MCP, subagent, provider-usage, permission-gate, and Ponytail packages;
+- a permission policy that denies secret paths, asks before shell/MCP/external-directory access, and keeps project trust interactive.
+
+Pi packages run with your user permissions. Their versions are pinned in `settings.json`; the install cache, credentials, sessions, and extension logs are deliberately ignored.
+
+Activate it safely:
+
+```sh
+cd ~/dotfiles
+stow -nv -t "$HOME" pi
+```
+
+If the dry run reports the current `settings.json`, `keybindings.json`, or Omarchy extension as a conflict, move only those files to a backup location first. Do not move `auth.json`, `sessions/`, or `npm/`.
+
+Then install the pinned packages and restart Pi:
+
+```sh
+stow -v -t "$HOME" pi
+sh ~/.pi/agent/install-packages.sh
+```
+
+Run `/mcp setup` inside Pi to adopt or create MCP server configuration. Keep server credentials in environment variables or local MCP files, never in this repository.
+
 ## Step-By-Step Safe Workflow
 
 1. Clone the repo:
@@ -125,37 +184,37 @@ After changing any opencode config, agent, command, skill, plugin, or MCP file, 
 git clone <repo-url> ~/dotfiles
 ```
 
-2. Enter the repo:
+1. Enter the repo:
 
 ```sh
 cd ~/dotfiles
 ```
 
-3. Pick the config package you want to enable:
+1. Pick the config package you want to enable:
 
 ```sh
 ls
 ```
 
-4. Preview the changes with a dry run:
+1. Preview the changes with a dry run:
 
 ```sh
 stow -nv -t "$HOME" nvim
 ```
 
-5. If Stow reports conflicts, back up or move the existing files first. For example:
+1. If Stow reports conflicts, back up or move the existing files first. For example:
 
 ```sh
 mv ~/.config/nvim ~/.config/nvim.backup
 ```
 
-6. Run Stow for real:
+1. Run Stow for real:
 
 ```sh
 stow -v -t "$HOME" nvim
 ```
 
-7. Open the app and verify the config loads:
+1. Open the app and verify the config loads:
 
 ```sh
 nvim

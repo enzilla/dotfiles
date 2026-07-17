@@ -42,6 +42,11 @@
       "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
       "enabled": false,
       "timeout": 15000
+    },
+    "supabase": {
+      "type": "remote",
+      "url": "https://mcp.supabase.com/mcp?project_ref=fwynwflbjymhrvzncffj",
+      "enabled": true
     }
   },
   "watcher": {
