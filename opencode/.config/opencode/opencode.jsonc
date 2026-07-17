@@ -14,13 +14,13 @@
     "plan": {
       "permission": {
         "edit": "deny",
-        "bash": "ask"
+        "bash": "allow"
       }
     },
     "explore": {
       "permission": {
         "edit": "deny",
-        "bash": "ask"
+        "bash": "allow"
       }
     }
   },

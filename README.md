@@ -104,7 +104,7 @@ stow -v -t "$HOME" kitty nvim opencode pi starship tmux
 
 The `opencode` package provides a shared global setup for all machines:
 
-- `opencode.jsonc` with conservative permissions, disabled sharing, snapshots, output limits, and optional MCP templates.
+- `opencode.jsonc` with unattended permissions, disabled sharing, snapshots, output limits, and optional MCP templates.
 - `agent/workbench.md` as the default primary agent for repo and dotfiles work.
 - `skills/safe-dotfiles-workflow/SKILL.md` for Stow-aware cross-device configuration changes.
 - `command/opencode-check.md`, `command/repo-review.md`, and `command/security-audit.md` for repeatable checks.
@@ -119,6 +119,8 @@ stow -v -t "$HOME" opencode
 ```
 
 MCP servers are included as disabled templates because they may require network access, browser dependencies, or extra tokens. Enable only the MCPs you trust and use on each machine.
+
+The default workbench auto-approves ordinary tool use. Explicit denials still protect secret paths and destructive shell commands; the built-in plan and explore agents retain their edit blocks without prompting for shell access.
 
 After changing any opencode config, agent, command, skill, plugin, or MCP file, quit and restart opencode. Running sessions keep the config loaded at startup.
 
@@ -154,9 +156,9 @@ The `pi` package configures the [Pi coding agent](https://pi.dev) with:
 - a Kanagawa Violet theme that follows Omarchy light/dark mode;
 - the existing task, question, fuzzy search, web research, and code-feedback extensions;
 - pinned MCP, subagent, provider-usage, permission-gate, and Ponytail packages;
-- a permission policy that denies secret paths, asks before shell/MCP/external-directory access, and keeps project trust interactive.
+- unattended project trust and permission auto-approval, while explicit secret-path and destructive-command denials remain enforced.
 
-Pi packages run with your user permissions. Their versions are pinned in `settings.json`; the install cache, credentials, sessions, and extension logs are deliberately ignored.
+Pi packages run with your user permissions. `"defaultProjectTrust": "always"` removes project trust prompts, and the permission system's `yoloMode` auto-approves every `ask` result. Explicit `deny` rules still block `.env`, credential directories, and `rm -rf`. Package versions are pinned in `settings.json`; install caches, credentials, sessions, and extension logs are deliberately ignored.
 
 Activate it safely:
 
