@@ -1,0 +1,15 @@
+onboarding = false
+
+[theme]
+name = "kanagawa"
+
+[theme.custom]
+panel_bg = "reset"
+accent = "#957FB8"
+
+[ui]
+agent_panel_sort = "spaces"
+
+[ui.toast]
+delivery = "terminal"
+delay_seconds = 1

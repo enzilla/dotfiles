@@ -1,0 +1,12 @@
+# Machine-local credentials, decisions, sessions, package installs, and caches.
+auth.json
+trust.json
+models-store.json
+sessions/
+npm/
+git/
+mcp.json
+mcp-cache.json
+usage-cache.json
+web-search.json
+extensions/pi-permission-system/logs/
