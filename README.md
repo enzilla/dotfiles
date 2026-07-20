@@ -140,11 +140,20 @@ herdr config check
 
 If the dry run reports an existing `config.toml`, move that file to a backup first; leave Herdr's logs, sockets, and `session.json` in place.
 
-Install the lifecycle integrations for the configured coding agents, then reload Herdr:
+The user service starts Herdr after reboot. It restores the workspace layout, then resumes supported agent conversations when a client attaches. Running processes cannot survive a reboot; pane history remains off because it may contain secrets.
+
+```sh
+systemctl --user daemon-reload
+systemctl --user enable herdr.service
+loginctl enable-linger "$USER"
+```
+
+Install the native integrations for the configured coding agents, then reload or restart each agent:
 
 ```sh
 herdr integration install pi
 herdr integration install opencode
+herdr integration install claude
 herdr integration status
 herdr server reload-config
 ```
