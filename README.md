@@ -8,6 +8,7 @@ This repository is organized so each top-level directory is a Stow package. Acti
 
 | Package | Configures | Target path |
 | --- | --- | --- |
+| `claude` | Claude Code settings | `~/.claude/settings.json` |
 | `herdr` | Herdr agent multiplexer | `~/.config/herdr/config.toml` |
 | `kitty` | Kitty terminal | `~/.config/kitty` |
 | `nvim` | Neovim / LazyVim setup | `~/.config/nvim` |
@@ -20,7 +21,7 @@ This repository is organized so each top-level directory is a Stow package. Acti
 
 - `git`
 - `stow`
-- The tools you want to configure, such as `herdr`, `nvim`, `tmux`, `kitty`, `pi`, and `starship`
+- The tools you want to configure, such as `claude`, `herdr`, `nvim`, `tmux`, `kitty`, `pi`, and `starship`
 
 Install Stow with your system package manager:
 
@@ -85,6 +86,7 @@ to:
 Activate one package at a time:
 
 ```sh
+stow --no-folding -v -t "$HOME" claude
 stow --no-folding -v -t "$HOME" herdr
 stow -v -t "$HOME" kitty
 stow -v -t "$HOME" starship
@@ -96,7 +98,7 @@ stow -v -t "$HOME" pi
 Or activate everything currently in this repo:
 
 ```sh
-stow --no-folding -v -t "$HOME" herdr
+stow --no-folding -v -t "$HOME" claude herdr
 stow -v -t "$HOME" kitty nvim opencode pi starship tmux
 ```
 
