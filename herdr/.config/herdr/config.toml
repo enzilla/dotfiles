@@ -9,6 +9,7 @@ accent = "#957FB8"
 
 [ui]
 agent_panel_sort = "spaces"
+copy_on_select = false
 
 [ui.toast]
 delivery = "terminal"
