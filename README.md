@@ -9,6 +9,7 @@ This repository is organized so each top-level directory is a Stow package. Acti
 | Package | Configures | Target path |
 | --- | --- | --- |
 | `claude` | Claude Code settings | `~/.claude/settings.json` |
+| `graphify` | graphify knowledge-graph tooling: bootstrap, refresh, cross-repo query | `~/.graphify` |
 | `herdr` | Herdr agent multiplexer | `~/.config/herdr/config.toml` |
 | `kitty` | Kitty terminal | `~/.config/kitty` |
 | `nvim` | Neovim / LazyVim setup | `~/.config/nvim` |
