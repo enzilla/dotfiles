@@ -4,7 +4,8 @@ onboarding = false
 name = "kanagawa"
 
 [theme.custom]
-panel_bg = "reset"
+panel_bg = "transparent"
+sidebar_bg = "transparent"
 accent = "#957FB8"
 
 [ui]
