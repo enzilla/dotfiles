@@ -1,11 +1,18 @@
 [Unit]
 Description=Herdr persistent agent multiplexer
+# Ordenação apenas (sem Requires/PartOf): quando a sessão gráfica faz parte da
+# transação de boot, o herdr sobe depois dela e herda WAYLAND_DISPLAY — do que
+# dependem wl-paste/wl-copy nos agentes. Sem sessão gráfica (SSH), sobe igual.
+After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/herdr server
-Restart=on-failure
+ExecStart=/usr/bin/herdr server
+Restart=always
 RestartSec=3
+# O kernel mata filhos sob pressão de memória; sem isto o systemd trata a morte
+# do filho como falha da unit e derruba todos os panes de uma vez.
+OOMPolicy=continue
 
 [Install]
 WantedBy=default.target
