@@ -1,10 +1,9 @@
 {
-  "theme": "kanagawa-violet",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
+  "lastChangelogVersion": "0.85.1",
+  "theme": "dark",
+  "defaultProvider": "xai",
+  "defaultModel": "grok-4.6",
   "defaultThinkingLevel": "xhigh",
-  "defaultProjectTrust": "always",
-  "enableSkillCommands": true,
   "packages": [
     "npm:@juicesharp/rpiv-todo@1.20.0",
     "npm:@juicesharp/rpiv-ask-user-question@1.20.0",
@@ -16,5 +15,6 @@
     "npm:@gotgenes/pi-permission-system@20.7.3",
     "npm:@sreetej510/pi-usage@0.1.18",
     "npm:@dietrichgebert/ponytail@4.8.4"
-  ]
+  ],
+  "defaultProjectTrust": "always"
 }
