@@ -8,8 +8,8 @@ This repository is organized so each top-level directory is a Stow package. Acti
 
 | Package | Configures | Target path |
 | --- | --- | --- |
+| `agent-skills` | Portable skills shared by coding agents | `~/.agents/skills` |
 | `claude` | Claude Code settings | `~/.claude/settings.json` |
-| `graphify` | graphify knowledge-graph tooling: bootstrap, refresh, cross-repo query | `~/.graphify` |
 | `herdr` | Herdr agent multiplexer | `~/.config/herdr/config.toml` |
 | `kitty` | Kitty terminal | `~/.config/kitty` |
 | `nvim` | Neovim / LazyVim setup | `~/.config/nvim` |
@@ -87,6 +87,7 @@ to:
 Activate one package at a time:
 
 ```sh
+stow --no-folding -v -t "$HOME" agent-skills
 stow --no-folding -v -t "$HOME" claude
 stow --no-folding -v -t "$HOME" herdr
 stow -v -t "$HOME" kitty
@@ -99,9 +100,27 @@ stow -v -t "$HOME" pi
 Or activate everything currently in this repo:
 
 ```sh
-stow --no-folding -v -t "$HOME" claude herdr
+stow --no-folding -v -t "$HOME" agent-skills claude herdr
 stow -v -t "$HOME" kitty nvim opencode pi starship tmux
 ```
+
+## Agent Skills
+
+The `agent-skills` package stores portable skills in the shared `~/.agents/skills` location:
+
+- [`handoff`](https://skills.sh/mattpocock/skills/handoff) — redacted context summary for another agent
+- [`appllama-app-design-skill`](https://skills.sh/appllama/appllama-skills/appllama-app-design-skill) — Expo / React Native native-quality bar
+- [`appllama-usage`](https://skills.sh/appllama/appllama-skills/appllama-usage) — Appllama MCP research playbooks (needs Pro MCP to be useful)
+
+```sh
+cd ~/dotfiles
+stow --no-folding -nv -t "$HOME" agent-skills
+stow --no-folding -v -t "$HOME" agent-skills
+test -L "$HOME/.agents/skills/handoff/SKILL.md"
+test -L "$HOME/.agents/skills/appllama-app-design-skill/SKILL.md"
+```
+
+Restart coding agents after adding or updating a skill.
 
 ## opencode
 
