@@ -8,5 +8,14 @@ hl.config({
   },
   decoration = {
     rounding = 8,
+
+    -- Desfoque atrás de janelas transparentes (o kitty está em
+    -- background_opacity 0). O default do Omarchy vem desligado.
+    blur = {
+      enabled = true,
+      size = 8,
+      passes = 3,
+      noise = 0.02,
+    },
   },
 })
