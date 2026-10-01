@@ -14,6 +14,17 @@ case "$tool" in
       echo "Push por HEAD bloqueado: empurre pelo nome da branch (git push origin <branch>:<branch>)." >&2
       exit 2
     fi
+    # Segredos: despejo do ambiente, leitura de .env (exceto .example) e echo de variável sensível.
+    segredo=""
+    grep -Eq '(^|[;&|[:space:]])(env|printenv|export -p|set)[[:space:]]*($|[;&|])' <<<"$cmd" && segredo="despejo do ambiente"
+    grep -Eq '\b(cat|less|more|head|tail|bat|source|\.)[[:space:]][^|;&]*\.env(\.[A-Za-z0-9_-]+)?([[:space:]"'"'"']|$)' <<<"$cmd" \
+      && ! grep -Eq '\.env\.(example|sample|template)' <<<"$cmd" && segredo="leitura de .env"
+    grep -Eq '(echo|printf|printenv)[^|;&]*\$\{?[A-Z0-9_]*(DSN|KEY|TOKEN|SECRET|PASSWORD|PASSWD|PASS|CREDENTIALS?)\b' <<<"$cmd" && segredo="impressão de variável sensível"
+    grep -Eq 'gcloud[[:space:]]+secrets[[:space:]]+versions[[:space:]]+access' <<<"$cmd" && segredo="leitura de segredo do GSM"
+    if [ -n "$segredo" ]; then
+      echo "Bloqueado ($segredo): não imprima segredos. Mostre só os nomes (ex.: grep -o '^[A-Z_]*=' .env) ou teste a presença com [ -n \"\$VAR\" ]." >&2
+      exit 2
+    fi
     ;;
   Edit|Write|MultiEdit)
     f=$(jq -r '.tool_input.file_path // empty' <<<"$input")

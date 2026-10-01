@@ -18,3 +18,14 @@ Estas regras são só minhas, não são política do time. Não as proponha para
 - Prefira comportamento fixo a prop/flag opcional, e contrato neutro a acoplamento com fornecedor (ex.: Tasy). Na dúvida, pergunte antes.
 - Um PR por repositório por demanda; não espalhe PRs em rascunho.
 - Nunca imprima valores de variáveis de ambiente, DSNs ou segredos; mostre só os nomes.
+
+## Ferramentas pessoais
+- Bug de produção ou homologação: delegue primeiro ao agente `investigar-producao` e só implemente depois do diagnóstico.
+- Antes de abrir PR: rode o agente `revisar-criterios-aceite` com a branch e a issue.
+- Versão implantada: `numih-versoes [filtro]` (prod × hom; com filtro, mostra também a última release).
+- Antes de disparar subagentes em repositórios Go: `numih-gowork` no diretório do go.work, para ver clones desatualizados.
+- Hotfix e release: skill `executar-hotfix`.
+
+## Repositório rpa
+- Mudança em runner ou fluxo de portal: antes de abrir PR, execute o fluxo em dry-run contra o portal real e relate as telas e as respostas do portal. Só abra PR e corte release se o dry-run passar.
+- O dry-run é o padrão do worker (`NUMIH_DRY_RUN` é fail-safe). Nunca defina `NUMIH_DRY_RUN=false`/`0`, porque isso submete de verdade na operadora.

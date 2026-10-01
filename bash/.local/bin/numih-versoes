@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Versões implantadas por serviço: prod (infra main) × hom (infra hom).
+# Uso: numih-versoes [filtro]   — com filtro, mostra também a última release do repositório.
+set -euo pipefail
+INFRA="${NUMIH_INFRA:-$HOME/dev/infra-tf-numih}"
+filtro="${1:-}"
+git -C "$INFRA" fetch -q origin main hom
+
+versao() { git -C "$INFRA" show "origin/$1:$2" 2>/dev/null | grep -m1 -oP 'image_version\s*=\s*"\K[^"]+' || echo "-"; }
+
+printf '%-34s %-22s %-22s %s\n' SERVICO PROD HOM ULTIMA_RELEASE
+for f in $(git -C "$INFRA" ls-tree --name-only origin/hom | grep -E '^(module|core)-.*\.tf$' | grep -E "${filtro:-.}"); do
+  p=$(versao main "$f"); h=$(versao hom "$f")
+  [ "$p" = "-" ] && [ "$h" = "-" ] && continue
+  svc=${f%.tf}; svc=${svc#module-}
+  ultima=""
+  if [ -n "$filtro" ]; then
+    comp=${svc##*-}; repo=${svc%-*}
+    ultima=$(gh release list -R "Numih/$repo" -L 30 --json tagName --jq "[.[].tagName | select(startswith(\"$comp/\"))][0] // \"?\"" 2>/dev/null || echo "?")
+  fi
+  marca=""; [ "$p" != "$h" ] && marca=" *"
+  printf '%-34s %-22s %-22s %s\n' "$svc" "$p" "$h$marca" "$ultima"
+done
