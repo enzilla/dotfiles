@@ -13,3 +13,11 @@
 - Mudança em vários repositórios ou com subagentes: mostre o desenho em até 10 linhas (contrato, papel de cada repo, comportamento final) e espere minha aprovação. Depois disso, execute sem novas perguntas.
 - Um PR por repositório por demanda; não espalhe PRs em rascunho.
 - Nunca imprima valores de variáveis de ambiente, DSNs ou segredos; mostre só os nomes.
+
+## Ferramentas pessoais
+- Bug de produção ou homologação: delegue primeiro ao agente `investigar-producao` e só implemente depois do diagnóstico.
+- Antes de abrir PR: rode o agente `revisar-criterios-aceite` com a branch e a issue.
+- Hotfix e release: skill `executar-hotfix`.
+
+## Repositório rpa
+- Mudança em runner ou fluxo de portal: antes de abrir PR, execute o fluxo em dry-run contra o portal real e relate as telas e as respostas do portal. Só abra PR e corte release se o dry-run passar.
