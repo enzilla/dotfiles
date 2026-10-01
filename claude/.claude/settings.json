@@ -7,7 +7,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opus",
   "skillOverrides": {
     "code-review-excellence": "off",
     "go-code-review": "off",
@@ -37,15 +36,29 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /home/enzo/.claude/hooks/guardas-pessoais.sh",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
+  "workflowKeywordTriggerEnabled": false,
   "statusLine": {
     "type": "command",
     "command": "bash /home/enzo/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
     "ponytail@ponytail": true,
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": true,
+    "autoharness@autoharness": true
   },
   "extraKnownMarketplaces": {
     "ponytail": {
@@ -59,9 +72,21 @@
         "source": "github",
         "repo": "thedotmack/claude-mem"
       }
+    },
+    "autoharness": {
+      "source": {
+        "source": "github",
+        "repo": "tigerless-labs/autoharness"
+      }
     }
   },
   "effortLevel": "low",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "advisorModel": "fable",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",
@@ -101,6 +126,5 @@
       "**Trusted repo**: /home/enzo/dev/modulos/hospitalar (github.com/Numih/hospitalar), internal visibility",
       "**Org-specific CLIs**: numih-squash (routine under this project)"
     ]
-  },
-  "workflowKeywordTriggerEnabled": false
+  }
 }
