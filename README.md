@@ -15,6 +15,7 @@ This repository is organized so each top-level directory is a Stow package. Acti
 | `nvim` | Neovim / LazyVim setup | `~/.config/nvim` |
 | `opencode` | opencode agents, skills, commands, MCP templates, and safety defaults | `~/.config/opencode` |
 | `pi` | Pi coding agent settings, theme, extensions, and package manifest | `~/.pi/agent` |
+| `secret-broker` | Bitwarden secret broker for agents (MCP stdio + CLI) and its Pi MCP registration | `~/.local/lib/secret-broker`, `~/.local/bin/secret-broker`, `~/.config/mcp` |
 | `starship` | Starship prompt | `~/.config/starship.toml` |
 | `tmux` | tmux and tmux plugins | `~/.config/tmux` |
 
@@ -208,6 +209,24 @@ sh ~/.pi/agent/install-packages.sh
 ```
 
 Run `/mcp setup` inside Pi to adopt or create MCP server configuration. Keep server credentials in environment variables or local MCP files, never in this repository.
+
+## Secret Broker
+
+Lets coding agents use Bitwarden credentials without the secret entering the model context. The broker runs only allowlisted actions, injects the secret into the child process environment, and redacts every injected value from the output. It has no "get secret" tool on purpose.
+
+Only the code lives here. Everything machine-specific stays local, outside this repository:
+
+| Local file | Purpose |
+| --- | --- |
+| `~/.config/secret-broker/config.json` | allowlist of actions (`secret` = `bw` item name or id; `env` = one variable, or a map of variable to item field: `username`, `password` or a custom field name) |
+| `~/.config/secret-broker/token` | `BW_SESSION` (mode 600) |
+| `~/.config/secret-broker/acoes/` | wrapper scripts used by local actions |
+
+```sh
+stow -v -t "$HOME" secret-broker
+secret-broker --self-check
+secret-broker list
+```
 
 ## Step-By-Step Safe Workflow
 

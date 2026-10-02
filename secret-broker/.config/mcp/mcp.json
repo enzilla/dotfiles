@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "secret-broker": {
+      "command": "/home/enzo/.local/bin/secret-broker",
+      "lifecycle": "lazy",
+      "directTools": true
+    }
+  }
+}
