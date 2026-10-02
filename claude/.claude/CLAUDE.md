@@ -25,6 +25,7 @@ Estas regras são só minhas, não são política do time. Não as proponha para
 - Versão implantada: `numih-versoes [filtro]` (prod × hom; com filtro, mostra também a última release).
 - Antes de disparar subagentes em repositórios Go: `numih-gowork` no diretório do go.work, para ver clones desatualizados.
 - Hotfix e release: skill `executar-hotfix`.
+- Credenciais: use as ações do `secret-broker` (`secret-broker list` / `run`), que injetam o segredo só no processo filho. Nunca rode `bw get` nem leia o `token` do broker.
 
 ## Repositório rpa
 - Mudança em runner ou fluxo de portal: antes de abrir PR, execute o fluxo em dry-run contra o portal real e relate as telas e as respostas do portal. Só abra PR e corte release se o dry-run passar.
