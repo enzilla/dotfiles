@@ -25,7 +25,7 @@
 - O padrão é headless, por desempenho. Use `--headed` (com `WAYLAND_DISPLAY=wayland-1`) só se eu pedir para acompanhar.
 - Leia a página com `snapshot -i -c` e aja pelas refs (`@eN`), não por coordenada. Agrupe os passos previsíveis em `agent-browser batch --bail`.
 - Tire `screenshot` com caminho absoluto no scratchpad (caminho relativo grava no repositório) a cada tela relevante: estado inicial, cada ação significativa, erro e resultado final.
-- Ao final, entregue um relatório completo da navegação: um HTML com os prints embutidos, publicado como Artifact. Ele traz o objetivo, cada passo (o que fiz, o que a tela mostrou e o print) e o que deu errado. Quando for homologação de issue, traz também a conclusão por critério de aceite (aprovado ou reprovado, com a evidência).
+- Ao final, entregue um relatório completo da navegação: um arquivo HTML local no scratchpad, com os prints embutidos, sem publicar como Artifact. Me passe o caminho do arquivo. Ele traz o objetivo, cada passo (o que fiz, o que a tela mostrou e o print) e o que deu errado. Quando for homologação de issue, traz também a conclusão por critério de aceite (aprovado ou reprovado, com a evidência).
 
 ## Repositório rpa
 - Mudança em runner ou fluxo de portal: antes de abrir PR, execute o fluxo em dry-run contra o portal real e relate as telas e as respostas do portal. Só abra PR e corte release se o dry-run passar.
