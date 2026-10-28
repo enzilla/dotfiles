@@ -18,6 +18,7 @@ for rodar o fluxo precisa do seu próprio `.specify/`.
 Por que não dá pra globalizar o motor: os comandos referenciam `.specify/` por
 caminho relativo à raiz do repo e os scripts gravam `specs/` e `.specify/feature.json`
 dentro do projeto. Tentar usar `--integration claude` falha em repos cujo
+`.claude/skills` é symlink pra fora do repo — por isso usamos
 o integration `generic`, que escreve numa pasta dentro do repo e não toca o symlink.
 
 ## Pré-requisitos

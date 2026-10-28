@@ -36,12 +36,9 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 if [[ -f ~/.config/secrets.env ]]; then
   source ~/.config/secrets.env
 fi
+# Fragmentos locais (ex.: configuração de trabalho fora deste repositório).
+for f in ~/.bashrc.d/*.sh; do [[ -r $f ]] && source "$f"; done
 
-
-
-export PUBSUB_EMULATOR_HOST=localhost:8681
-
-export GRAPHQL_COMPLEXITY_LIMIT=300
 # Bash settings
 set -o vi
 
@@ -51,10 +48,7 @@ shopt -s expand_aliases
 # Docker
 
 # Alias
-alias dc='docker compose -f $HOME/docker/infra/compose/docker-compose.yml'
 alias d='docker'
-alias dr='rm -rf ~/docker |
-alias dcp='dc pull --ignore-pull-failures'
 alias dcr='docker rmi -f '
 alias dgrep="d ps | grep"
 alias dlog="d logs -f"
@@ -72,6 +66,7 @@ dattach() {
 }
 
 # Claude
+#alias cl="claude"
 alias cl="claude --dangerously-skip-permissions"
 alias c="claude --dangerously-skip-permissions -p"
 
@@ -249,17 +244,6 @@ rabbitmq-clean-module-queues() {
 
 # Pi
 export PATH="/home/enzo/.local/share/pi-node/node-v22.23.0-linux-x64/bin:$PATH"
-
-# FortiClient VPN
-
-# -p pede a senha. Testado: a senha salva pela GUI e apagada por um connect via
-# CLI, e o -s do CLI nao persiste. Pedir sempre e a unica forma confiavel --
-# sem isso da "Insufficient credential(s)".
-alias vpnup='fortivpn connect "$FCT_VPN" -p'
-alias vpndown='fortivpn disconnect'
-alias vpnst='fortivpn status'
-alias vpnls='fortivpn list'
-alias vpned='fortivpn edit "$FCT_VPN"'
 
 # O servidor do herdr sobe como serviço systemd fora da sessão gráfica, então
 # seus panes herdam um ambiente sem WAYLAND_DISPLAY e wl-paste/wl-copy falham —

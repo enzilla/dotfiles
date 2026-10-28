@@ -1,31 +1,67 @@
+## Memory
+
+Your memory is OptMem:
+- The tool is `~/.optmem/memo`
+- Your memories are in `~/.optmem/memory`
+
+OptMem outlives every session, compaction, model and vendor change.
+Without it you do not know who you are, or what was decided and tried.
+
+### At startup: activating OptMem (mandatory)
+
+Run `~/.optmem/memo wake` before any other tool call, in every session, and
+then do exactly what it prints, to the end of its output.
+
+### While working: register memories (mandatory)
+
+Call `~/.optmem/memo note "<1 line, max 280 bytes>"` whenever you learn
+something new, or something worth keeping happens. That covers a task
+worth real effort, a fact or insight the user teaches you, anything you
+learn about their life (even indirectly), any event of lasting effect.
+
+Do not register redundant memories.
+
+If `~/.optmem/memo note` asks a compression: do it before your next action.
+
+Never edit or delete anything under `~/.optmem/memory`: the tool manages it.
+
+### When you need an old memory: search, or navigate
+
+`~/.optmem/memo recall <regex>` searches every memory, word for word.
+
+Your memories also form a binary tree: #0-1, #2-3 ... exist as one-line
+summaries, pairs of those as #0-3, and so on -- every `#a-b` line wake
+prints is one node of it. `~/.optmem/memo zoom <a-b>` opens a node into its
+two halves, down to the raw memories.
+
+### If you're a subagent: skip everything above
+
+Parallel sessions on this machine are all you, and may all write memories.
+A subagent is not: it must never run `memo`, because it cannot judge what
+is already known, and its notes would arrive duplicated and incorrectly.
+When you spawn one, write: `You are a subagent. Don't run memo.`
+
 # Preferências pessoais
 
-
-## Verificar antes de afirmar
-- Antes de concluir algo sobre o código, rode `git fetch` e compare com `origin/main` ou com a tag implantada. O checkout local pode estar desatualizado.
-- Antes de cortar uma release, rode `gh release list` e confirme que não existe versão mais nova.
-- Antes de abrir PR no infra, procure com `gh pr list` um PR aberto para o mesmo ambiente e reutilize-o.
-- Build Go falhando: teste também com `GOWORK=off`, porque o go.work pode apontar para clones antigos. Só chame de "pré-existente" depois disso.
-- Regras TISS/ANS: pesquise a documentação oficial em vez de responder de memória.
-
 ## Forma de trabalhar
-- Bug de produção: apresente a causa raiz com evidências (log, consulta, trecho com caminho e commit) antes de escrever a correção.
+- Cron só para horário de relógio fixo que eu pedi. Job em andamento (CI, deploy, migração) fica com um subagente que lê o estado até terminar.
 - Mudança em vários repositórios ou com subagentes: mostre o desenho em até 10 linhas (contrato, papel de cada repo, comportamento final) e espere minha aprovação. Depois disso, execute sem novas perguntas.
-- Um PR por repositório por demanda; não espalhe PRs em rascunho.
+- Prefira comportamento fixo a prop/flag opcional. Na dúvida, pergunte antes.
 - Nunca imprima valores de variáveis de ambiente, DSNs ou segredos; mostre só os nomes.
-
-## Ferramentas pessoais
-- Bug de produção ou homologação: delegue primeiro ao agente `investigar-producao` e só implemente depois do diagnóstico.
-- Antes de abrir PR: rode o agente `revisar-criterios-aceite` com a branch e a issue.
-- Hotfix e release: skill `executar-hotfix`.
 - Credenciais: use as ações do `secret-broker` (`secret-broker list` / `run`), que injetam o segredo só no processo filho. Nunca rode `bw get` nem leia o `token` do broker.
 
-## Navegação no browser
-- Use o `agent-browser` (CLI) em vez da extensão do Chrome. A config em `~/.agent-browser/config.json` já aponta para o Brave com um perfil próprio, logado no hom. Use a extensão só se eu pedir.
-- O padrão é headless, por desempenho. Use `--headed` (com `WAYLAND_DISPLAY=wayland-1`) só se eu pedir para acompanhar.
-- Leia a página com `snapshot -i -c` e aja pelas refs (`@eN`), não por coordenada. Agrupe os passos previsíveis em `agent-browser batch --bail`.
-- Tire `screenshot` com caminho absoluto no scratchpad (caminho relativo grava no repositório) a cada tela relevante: estado inicial, cada ação significativa, erro e resultado final.
-- Ao final, entregue um relatório completo da navegação: um arquivo HTML local no scratchpad, com os prints embutidos, sem publicar como Artifact. Me passe o caminho do arquivo. Ele traz o objetivo, cada passo (o que fiz, o que a tela mostrou e o print) e o que deu errado. Quando for homologação de issue, traz também a conclusão por critério de aceite (aprovado ou reprovado, com a evidência).
+## Estilo das respostas
+Vale só para as respostas que você escreve para mim. Não vale para prompt de subagente, skill nem comentário que outro agente vai ler: esses precisam do porquê e do contexto.
 
-## Repositório rpa
-- Mudança em runner ou fluxo de portal: antes de abrir PR, execute o fluxo em dry-run contra o portal real e relate as telas e as respostas do portal. Só abra PR e corte release se o dry-run passar.
+**Padrão controlado** (inspirado no ASD-STE100) para status, procedimento, passo a passo e resposta operacional:
+- Frases curtas, com meta de 15 a 20 palavras e uma ideia por frase. Exceção: diagnóstico e causa raiz podem encadear "X porque Y" quando separar quebraria a relação causal.
+- Imperativo nas instruções («Remova a peça», não «Deve-se remover…»).
+- Voz ativa: diga quem faz a ação.
+- Vocabulário direto, sem metáfora, sem adjetivo decorativo e sem jargão desnecessário.
+- Procedimento em lista numerada. Marcadores só para itens sem ordem.
+- Sem introdução nem cortesia. Não recapitule o que já foi dito. Termine com o estado final: o que foi verificado, o que não foi e o que ficou pendente.
+
+**Texto livre** para discussão de produto, decisão, dúvida aberta e análise de alternativas. Mesmo assim, comece pela recomendação e use frases diretas.
+
+Na dúvida, use o padrão controlado e avise que pode detalhar em texto livre. Eu mudo o modo escrevendo «livre» ou «padrão» no início da mensagem.
+
