@@ -112,6 +112,8 @@ The `agent-skills` package stores portable skills in the shared `~/.agents/skill
 - [`handoff`](https://skills.sh/mattpocock/skills/handoff) — redacted context summary for another agent
 - [`appllama-app-design-skill`](https://skills.sh/appllama/appllama-skills/appllama-app-design-skill) — Expo / React Native native-quality bar
 - [`appllama-usage`](https://skills.sh/appllama/appllama-skills/appllama-usage) — Appllama MCP research playbooks (needs Pro MCP to be useful)
+- [`antislop*`](https://github.com/miqdadbadjuber/anti-slop) (v3.2.24, MIT) — six anti-slop filters, copied without the installer and with `disable-model-invocation: true`
+- `aplicar-antislop` — personal entry point: runs the antislop skills in order and builds `DESIGN.md` by interview
 
 ```sh
 cd ~/dotfiles
